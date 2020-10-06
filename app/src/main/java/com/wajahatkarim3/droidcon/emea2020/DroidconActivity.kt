@@ -29,7 +29,9 @@ class DroidconActivity : AppCompatActivity() {
                         )
                     },
                     bodyContent = {
-                        AnimateContentSizeDemo()
+                        //AnimateContentSizeDemo()
+//                        VisibilityAnimationFAB()
+                        AnimatedBottomNavigation()
                     }
                 )
             }
