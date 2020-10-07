@@ -1,9 +1,8 @@
 package com.wajahatkarim3.droidcon.emea2020
 
+import android.util.Log
 import androidx.compose.animation.animateContentSize
-import androidx.compose.animation.core.AnimationSpec
-import androidx.compose.animation.core.FastOutSlowInEasing
-import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -33,16 +32,17 @@ fun AnimateContentSizeDemo() {
             .fillMaxWidth()
             .padding(20.dp)
     ) {
-        text()
+        ExpandableText()
         Spacer(Modifier.height(20.dp))
-        button()
+        ExpandableButton()
         Spacer(Modifier.height(20.dp))
-        image()
+        PortraitModeImage()
+        Spacer(Modifier.height(150.dp))
     }
 }
 
 @Composable
-fun text() {
+fun ExpandableText() {
     val shortText = "Click me"
     val longText = "Very long text passage that spans\nacross multiple lines, paragraphs\nand pages"
     var short by remember { mutableStateOf(true) }
@@ -69,7 +69,7 @@ fun text() {
 }
 
 @Composable
-fun button() {
+fun ExpandableButton() {
     val shortText = "Short"
     val longText = "Very loooooong text"
     var short by remember { mutableStateOf(true) }
@@ -89,13 +89,18 @@ fun button() {
 }
 
 @Composable
-fun image() {
+fun PortraitModeImage() {
     var portraitMode by remember { mutableStateOf(true) }
     Box(
         Modifier.clickable { portraitMode = !portraitMode }
             .sizeIn(maxWidth = 300.dp, maxHeight = 300.dp)
             .background(if (portraitMode) Color(0xFFfffbd0) else Color(0xFFe3ffd9))
-            .animateContentSize(tween(500, easing = FastOutSlowInEasing))
+            .animateContentSize(
+                animSpec = tween(500, easing = LinearEasing),
+                endListener = { startSize, endSize ->
+                    Log.d("droidcon", "$startSize -> $endSize")
+                }
+            )
             .aspectRatio(if (portraitMode) 3 / 4f else 16 / 9f)
     ) {
         Text(

@@ -1,7 +1,7 @@
 package com.wajahatkarim3.droidcon.emea2020
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.*
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Icon
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.background
@@ -32,7 +32,7 @@ fun VisibilityAnimationFAB() {
     var expanded by remember { mutableStateOf(true) }
     FloatingActionButton(
         onClick = { expanded = !expanded },
-        modifier = Modifier
+        modifier = Modifier.padding(10.dp)
     ) {
         Row(Modifier.padding(start = 16.dp, end = 16.dp)) {
             Icon(
@@ -41,7 +41,15 @@ fun VisibilityAnimationFAB() {
             )
             AnimatedVisibility(
                 expanded,
-                modifier = Modifier.align(Alignment.CenterVertically)
+                modifier = Modifier.align(Alignment.CenterVertically),
+                enter = slideInHorizontally(
+                    initialOffsetX = { 300 },
+                    animSpec = tween(durationMillis = 2000)
+                ),
+                exit = slideOutVertically(
+                    targetOffsetY = { 100 },
+                    animSpec = tween(durationMillis = 2000)
+                )
             ) {
                 Text(modifier = Modifier.padding(start = 8.dp), text = "Like")
             }
@@ -101,7 +109,7 @@ fun BottomMenuButton(modifier: Modifier = Modifier, selected: Boolean, bgColor: 
             )
             AnimatedVisibility(
                 selected,
-                modifier = Modifier.align(Alignment.CenterVertically)
+                modifier = Modifier.align(Alignment.CenterVertically),
             ) {
                 Text(
                     text = text,
