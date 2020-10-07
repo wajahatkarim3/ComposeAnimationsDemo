@@ -4,7 +4,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.Text
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
@@ -41,6 +43,13 @@ class DroidconActivity : AppCompatActivity() {
                             HeadingText(text = "AnimatedVisibility()")
                             VisibilityAnimationFAB()
                             AnimatedBottomNavigation()
+
+                            HeadingText(text = "animate()")
+                            ColorAnimation()
+                            ScaleAndColorAnimation()
+                            Spacer(modifier = Modifier.height(20.dp))
+                            GenderSelectAnimation()
+                            Spacer(modifier = Modifier.height(200.dp))
                         }
                     }
                 )
