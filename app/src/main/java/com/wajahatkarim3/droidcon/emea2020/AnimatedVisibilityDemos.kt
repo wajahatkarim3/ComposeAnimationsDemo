@@ -5,6 +5,7 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.Icon
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -23,6 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.wajahatkarim3.droidcon.emea2020.ui.*
+import java.util.*
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
@@ -50,42 +52,73 @@ fun VisibilityAnimationFAB() {
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun AnimatedBottomNavigation() {
+
+    var bottomOptions = ArrayList<BottomMenuOption>()
+    bottomOptions.add(BottomMenuOption(bgColor = homeBgColor, textColor = homeTextColor, text = "Home", icon = Icons.Default.Home))
+    bottomOptions.add(BottomMenuOption(bgColor = likeBgColor, textColor = likeTextColor, text = "Like", icon = Icons.Default.FavoriteBorder))
+    bottomOptions.add(BottomMenuOption(bgColor = bookmarkBgColor, textColor = bookmarkTextColor, text = "Cart", icon = Icons.Default.ShoppingCart))
+    bottomOptions.add(BottomMenuOption(bgColor = settingsBgColor, textColor = settingsTextColor, text = "Settings", icon = Icons.Default.Settings))
+
+    var selectedIndex = remember { mutableStateOf(0) }
+
     Card(
         backgroundColor = Color.White,
         elevation = 10.dp,
-        modifier = Modifier.padding(20.dp)
+        modifier = Modifier.padding(10.dp)
     ) {
-        Row(modifier = Modifier.fillMaxWidth().wrapContentHeight().padding(10.dp)) {
-            BottomMenuButton(modifier = Modifier.weight(1f), bgColor = homeBgColor, textColor = homeTextColor, text = "Home", icon = Icons.Default.Home)
-            BottomMenuButton(modifier = Modifier.weight(1f), bgColor = likeBgColor, textColor = likeTextColor, text = "Like", icon = Icons.Default.FavoriteBorder)
-            BottomMenuButton(modifier = Modifier.weight(1f), bgColor = bookmarkBgColor, textColor = bookmarkTextColor, text = "Cart", icon = Icons.Default.ShoppingCart)
-            BottomMenuButton(modifier = Modifier.weight(1f), bgColor = settingsBgColor, textColor = settingsTextColor, text = "Settings", icon = Icons.Default.Settings)
+        Row(modifier = Modifier.fillMaxWidth().wrapContentHeight().padding(10.dp),
+            horizontalArrangement = Arrangement.SpaceAround
+        ) {
+            for (i in 0 until bottomOptions.size) {
+                BottomMenuButton(
+                    selected = i == selectedIndex.value,
+                    bgColor = bottomOptions[i].bgColor,
+                    textColor = bottomOptions[i].textColor,
+                    text = bottomOptions[i].text,
+                    icon = bottomOptions[i].icon
+                ) {
+                    selectedIndex.value = i
+                }
+            }
         }
     }
-
 }
 
+@ExperimentalAnimationApi
 @Composable
-fun BottomMenuButton(modifier: Modifier = Modifier, bgColor: Color, textColor: Color, text: String, icon: VectorAsset) {
-    Box (
+fun BottomMenuButton(modifier: Modifier = Modifier, selected: Boolean, bgColor: Color, textColor: Color, text: String, icon: VectorAsset, onClick: () -> Unit) {
+    Box(
         modifier = modifier.wrapContentWidth(align = Alignment.CenterHorizontally)
-            .background(color = bgColor, shape = RoundedCornerShape(percent = 10))
-            .padding(10.dp)
+            .background(color = if (selected) bgColor else Color.Transparent, shape = RoundedCornerShape(percent = 50))
+            .clickable(onClick = onClick)
+            .padding(top = 10.dp, bottom = 10.dp, start = 20.dp, end = 20.dp)
     ) {
         Row {
-           Icon(
-               asset = icon,
-               modifier = Modifier.padding(end = 10.dp).size(20.dp),
-               tint = textColor
-           )
-           Text(
-               text = text,
-               style = TextStyle(
-                   color = textColor,
-                   fontWeight = FontWeight.Bold,
-                   fontSize = 15.sp
-               )
-           )
+            Icon(
+                asset = icon,
+                modifier = Modifier.padding(end = 5.dp).size(20.dp),
+                tint = if (selected) textColor else Color.Black
+            )
+            AnimatedVisibility(
+                selected,
+                modifier = Modifier.align(Alignment.CenterVertically)
+            ) {
+                Text(
+                    text = text,
+                    style = TextStyle(
+                        color = textColor,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 15.sp
+                    )
+                )
+            }
         }
     }
 }
+
+data class BottomMenuOption (
+    val bgColor: Color,
+    val textColor: Color,
+    val text: String,
+    val icon: VectorAsset
+)
