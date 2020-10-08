@@ -48,7 +48,9 @@ class DroidconActivity : AppCompatActivity() {
                             GenderSelectAnimation()
 
                             HeadingText(text = "animatedFloat")
-                            HeartBeatDemo()
+                            //HeartBeatDemo()
+                            Spacer(modifier = Modifier.height(40.dp))
+                            MovingSquare()
                             Spacer(modifier = Modifier.height(100.dp))
                         }
                     }
