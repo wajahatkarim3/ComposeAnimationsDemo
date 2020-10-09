@@ -19,8 +19,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 val fabSizeKey = FloatPropKey()
-//val fabColorKey = ColorPropKey()
-//val fabIconAlphaKey = FloatPropKey()
+val fabColorKey = ColorPropKey()
+val fabIconAlphaKey = FloatPropKey()
 
 enum class FabSizeState {
     NORMAL, EXPLODED
@@ -37,15 +37,15 @@ fun ExplodingFabButton() {
         // What happens when Normal
         state(FabSizeState.NORMAL) {
             this[fabSizeKey] = 80f
-//            this[fabColorKey] = secondaryColor
-//            this[fabIconAlphaKey] = 1f
+            this[fabColorKey] = secondaryColor
+            this[fabIconAlphaKey] = 1f
         }
 
         // What happens when Exploded
         state(FabSizeState.EXPLODED) {
             this[fabSizeKey] = 5000f
-//            this[fabColorKey] = secondaryColor
-//            this[fabIconAlphaKey] = 1f
+            this[fabColorKey] = primaryColor
+            this[fabIconAlphaKey] = 0f
         }
 
         // Transition from Normal to Exploded
@@ -57,13 +57,13 @@ fun ExplodingFabButton() {
                 5000f at 1000
             }
 
-//            fabColorKey using tween(durationMillis = 1000, easing = FastOutSlowInEasing)
+            fabColorKey using tween(durationMillis = 1000, easing = FastOutSlowInEasing)
         }
 
         // Transition from Exploded to Normal
         transition(FabSizeState.EXPLODED to FabSizeState.NORMAL) {
             fabSizeKey using tween(durationMillis = 1000, easing = FastOutSlowInEasing)
-//            fabColorKey using tween(durationMillis = 1000, easing = FastOutSlowInEasing)
+            fabColorKey using tween(durationMillis = 1000, easing = FastOutSlowInEasing)
         }
     }
 
@@ -88,11 +88,11 @@ fun FabButton(fabSizeState: MutableState<FabSizeState>, transitionState: Transit
                 FabSizeState.EXPLODED
             else FabSizeState.NORMAL
         },
-        modifier = Modifier.size(transitionState[fabSizeKey].dp)
-//        backgroundColor = transitionState[fabColorKey]
+        modifier = Modifier.size(transitionState[fabSizeKey].dp),
+        backgroundColor = transitionState[fabColorKey]
     ) {
-        Icon(asset = Icons.Default.Add
-//            modifier = Modifier.drawOpacity(transitionState[fabIconAlphaKey])
+        Icon(asset = Icons.Default.Add,
+            modifier = Modifier.drawOpacity(transitionState[fabIconAlphaKey])
         )
     }
 }
