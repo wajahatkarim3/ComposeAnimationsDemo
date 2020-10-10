@@ -23,17 +23,25 @@ val fabColorKey = ColorPropKey()
 val fabIconAlphaKey = FloatPropKey()
 
 enum class FabSizeState {
-    NORMAL, EXPLODED
+    INITIAL, NORMAL, EXPLODED
 }
 
 @Composable
 fun ExplodingFabButton() {
-    val fabSizeState = remember { mutableStateOf(FabSizeState.NORMAL) }
+    val fabSizeState = remember { mutableStateOf(FabSizeState.INITIAL) }
     val secondaryColor = MaterialTheme.colors.secondary
     val primaryColor = MaterialTheme.colors.primary
 
 
     val fabTransitionDef = transitionDefinition<FabSizeState> {
+        // What happens Initially, on first render
+        // a transition automatically runs from INITIAL to NORMAL
+        state(FabSizeState.INITIAL) {
+            this[fabSizeKey] = 20f
+            this[fabColorKey] = secondaryColor
+            this[fabIconAlphaKey] = 0f
+        }
+        
         // What happens when Normal
         state(FabSizeState.NORMAL) {
             this[fabSizeKey] = 80f
