@@ -46,6 +46,11 @@ class DroidconActivity : AppCompatActivity() {
                     },
                     bodyContent = {
                         ScrollableColumn {
+                            Spacer(modifier = Modifier.height(20.dp))
+                            HeadingText(text = "Circle Menu")
+                            CircleMenu()
+                            Spacer(modifier = Modifier.height(100.dp))
+
                             HeadingText(text = "animateContentSize()")
                             AnimateContentSizeDemo()
 
@@ -69,12 +74,14 @@ class DroidconActivity : AppCompatActivity() {
                             RayWenderlichFavButton()
                             FlipView(flipDurationMs = 1000,
                                 front = {
-                                    Image(asset = imageResource(id = R.drawable.card_front),
+                                    Image(
+                                        asset = imageResource(id = R.drawable.card_front),
                                         modifier = Modifier.size(width = 300.dp, height = 150.dp)
                                     )
                                 },
                                 back = {
-                                    Image(asset = imageResource(id = R.drawable.card_back),
+                                    Image(
+                                        asset = imageResource(id = R.drawable.card_back),
                                         modifier = Modifier.size(width = 300.dp, height = 150.dp)
                                     )
                                 })
