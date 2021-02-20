@@ -2,23 +2,21 @@ package com.wajahatkarim3.droidcon.emea2020
 
 import androidx.compose.animation.*
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.Icon
-import androidx.compose.foundation.Text
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.FloatingActionButton
+import androidx.compose.material.Icon
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawOpacity
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.VectorAsset
-import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -36,7 +34,8 @@ fun VisibilityAnimationFAB() {
     ) {
         Row(Modifier.padding(start = 16.dp, end = 16.dp)) {
             Icon(
-                asset = Icons.Default.Favorite,
+                imageVector = Icons.Default.Favorite,
+                contentDescription = "Favorite Icon",
                 Modifier.align(Alignment.CenterVertically)
             )
             AnimatedVisibility(
@@ -44,11 +43,11 @@ fun VisibilityAnimationFAB() {
                 modifier = Modifier.align(Alignment.CenterVertically),
                 enter = slideInHorizontally(
                     initialOffsetX = { 300 },
-                    animSpec = tween(durationMillis = 2000)
+                    animationSpec = tween(durationMillis = 2000)
                 ),
                 exit = slideOutVertically(
                     targetOffsetY = { 100 },
-                    animSpec = tween(durationMillis = 2000)
+                    animationSpec = tween(durationMillis = 2000)
                 )
             ) {
                 Text(modifier = Modifier.padding(start = 8.dp), text = "Like")
@@ -94,7 +93,7 @@ fun AnimatedBottomNavigation() {
 
 @ExperimentalAnimationApi
 @Composable
-fun BottomMenuButton(modifier: Modifier = Modifier, selected: Boolean, bgColor: Color, textColor: Color, text: String, icon: VectorAsset, onClick: () -> Unit) {
+fun BottomMenuButton(modifier: Modifier = Modifier, selected: Boolean, bgColor: Color, textColor: Color, text: String, icon: ImageVector, onClick: () -> Unit) {
     Box(
         modifier = modifier.wrapContentWidth(align = Alignment.CenterHorizontally)
             .background(color = if (selected) bgColor else Color.Transparent, shape = RoundedCornerShape(percent = 50))
@@ -103,7 +102,8 @@ fun BottomMenuButton(modifier: Modifier = Modifier, selected: Boolean, bgColor: 
     ) {
         Row {
             Icon(
-                asset = icon,
+                imageVector = icon,
+                contentDescription = "",
                 modifier = Modifier.padding(end = 5.dp).size(20.dp),
                 tint = if (selected) textColor else Color.Black
             )
@@ -128,5 +128,5 @@ data class BottomMenuOption (
     val bgColor: Color,
     val textColor: Color,
     val text: String,
-    val icon: VectorAsset
+    val icon: ImageVector
 )

@@ -3,13 +3,13 @@ package com.wajahatkarim3.droidcon.emea2020
 import android.util.Log
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.*
-import androidx.compose.foundation.Text
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.Card
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -96,8 +96,8 @@ fun PortraitModeImage() {
             .sizeIn(maxWidth = 300.dp, maxHeight = 300.dp)
             .background(if (portraitMode) Color(0xFFfffbd0) else Color(0xFFe3ffd9))
             .animateContentSize(
-                animSpec = tween(500, easing = LinearEasing),
-                endListener = { startSize, endSize ->
+                animationSpec = tween(500, easing = LinearEasing),
+                finishedListener = { startSize, endSize ->
                     Log.d("droidcon", "$startSize -> $endSize")
                 }
             )

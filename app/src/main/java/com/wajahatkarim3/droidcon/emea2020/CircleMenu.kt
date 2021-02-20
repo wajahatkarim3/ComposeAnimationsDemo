@@ -1,13 +1,13 @@
 package com.wajahatkarim3.droidcon.emea2020
 
-import androidx.compose.animation.AnimatedVisibility
+import android.util.Log
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.animation.animate
-import androidx.compose.foundation.Icon
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
@@ -15,11 +15,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.TransformOrigin
-import androidx.compose.ui.draw.drawOpacity
-import androidx.compose.ui.drawLayer
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.VectorAsset
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import java.util.*
 
@@ -40,20 +39,8 @@ fun CircleMenu() {
     var degreeDiff = 360 / menuOptions.size
 
     Box(modifier = Modifier.fillMaxWidth().preferredHeight(500.dp),
-        alignment = Alignment.Center
+        contentAlignment = Alignment.Center
     ) {
-        // Menu Center Icon
-        Icon(
-            asset = if (menuOpen.value) Icons.Default.Close else Icons.Default.Menu,
-            modifier = Modifier.clickable(onClick = {
-                menuOpen.value = !menuOpen.value
-            }, indication = null).background(
-                    color = if (menuOpen.value) Color.Gray else Color.White,
-                    shape = CircleShape)
-                .padding(10.dp),
-            tint = Color.Black
-        )
-
         // Surrounding Menu Options
         var degrees = startDegrees
         for (i in 0 until menuOptions.size) {
@@ -63,35 +50,60 @@ fun CircleMenu() {
                 backgroundColor = menu.backgroundColor,
                 degrees = degrees,
                 distance = distance,
-                menuOpen.value
+                isMenuOpen = menuOpen.value,
+                onClick = {
+                    menuOpen.value = !menuOpen.value
+                    Log.e("Circle", "Button Out Clicked")
+                }
             )
             degrees += degreeDiff
         }
 
+        // Menu Center Icon
+        Icon(
+            imageVector = if (menuOpen.value) Icons.Default.Close else Icons.Default.Menu,
+            contentDescription = "",
+            modifier = Modifier.clickable(onClick = {
+                menuOpen.value = !menuOpen.value
+                Log.e("Circle", "Center Clicked")
+            }).background(
+                    color = if (menuOpen.value) Color.Gray else Color.White,
+                    shape = CircleShape)
+                .padding(10.dp),
+            tint = Color.Black
+        )
     }
 }
 
 @Composable
-fun MenuIcon(icon: VectorAsset, backgroundColor: Color, degrees: Double, distance: Float, isMenuOpen: Boolean) {
+fun MenuIcon(icon: ImageVector, backgroundColor: Color, degrees: Double, distance: Float, isMenuOpen: Boolean, onClick: () -> Unit) {
     // 0
-    Icon(
-        asset = icon,
-        modifier = Modifier
-            .drawLayer(
-                translationX = animate(
-                    if (isMenuOpen) distance * Math.cos(Math.toRadians(degrees)).toFloat() else 0f
-                ),
-                translationY = animate(
-                    if (isMenuOpen) distance * Math.sin(Math.toRadians(degrees)).toFloat() else 0f
-                )
-            )
-            .drawOpacity(animate(target = if (isMenuOpen) 1f else 0f))
-            .background(color = backgroundColor, shape = CircleShape).padding(10.dp),
-        tint = Color.White
-    )
+    Box {
+        Icon(
+            imageVector = icon,
+            contentDescription = "",
+            modifier = Modifier
+                .graphicsLayer(
+                    translationX = animateFloatAsState(
+                        if (isMenuOpen) distance * Math.cos(Math.toRadians(degrees))
+                            .toFloat() else 0f
+                    ).value,
+                    translationY = animateFloatAsState(
+                        if (isMenuOpen) distance * Math.sin(Math.toRadians(degrees))
+                            .toFloat() else 0f
+                    ).value
+                ).clickable(onClick = {
+                    onClick.invoke()
+                    Log.e("Circle", "Button Clicked")
+                })
+                .alpha(animateFloatAsState(targetValue = if (isMenuOpen) 1f else 0f).value)
+                .background(color = backgroundColor, shape = CircleShape).padding(10.dp),
+            tint = Color.White
+        )
+    }
 }
 
 data class MenuOptionModel (
-    val icon: VectorAsset,
+    val icon: ImageVector,
     val backgroundColor: Color
 )
