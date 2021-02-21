@@ -37,7 +37,7 @@ class DroidconActivity : ComponentActivity() {
                         )
                     },
                     floatingActionButton = {
-                        //ExplodingFabButton()
+                        ExplodingFabButton()
                     },
                     bodyContent = {
                         LazyColumn {
@@ -67,22 +67,22 @@ class DroidconActivity : ComponentActivity() {
                                 Spacer(modifier = Modifier.height(100.dp))
 
                                 HeadingText(text = "Transitions")
-                                //RayWenderlichFavButton()
-//                                FlipView(flipDurationMs = 1000,
-//                                    front = {
-//                                        Image(
-//                                            painter = painterResource(id = R.drawable.card_front),
-//                                            contentDescription = "",
-//                                            modifier = Modifier.size(width = 300.dp, height = 150.dp)
-//                                        )
-//                                    },
-//                                    back = {
-//                                        Image(
-//                                            painter = painterResource(id = R.drawable.card_back),
-//                                            contentDescription = "",
-//                                            modifier = Modifier.size(width = 300.dp, height = 150.dp)
-//                                        )
-//                                    })
+                                RayWenderlichFavButton()
+                                FlipView(flipDurationMs = 1000,
+                                    front = {
+                                        Image(
+                                            painter = painterResource(id = R.drawable.card_front),
+                                            contentDescription = "",
+                                            modifier = Modifier.size(width = 300.dp, height = 150.dp)
+                                        )
+                                    },
+                                    back = {
+                                        Image(
+                                            painter = painterResource(id = R.drawable.card_back),
+                                            contentDescription = "",
+                                            modifier = Modifier.size(width = 300.dp, height = 150.dp)
+                                        )
+                                    })
                             }
                         }
                     }
