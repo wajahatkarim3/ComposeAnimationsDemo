@@ -21,6 +21,8 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.FabPosition
+import androidx.compose.runtime.CompositionLocalProvider
 import com.wajahatkarim3.droidcon.emea2020.ui.DroidconEMEA2020Theme
 
 class DroidconActivity : ComponentActivity() {
@@ -39,7 +41,8 @@ class DroidconActivity : ComponentActivity() {
                     floatingActionButton = {
                         ExplodingFabButton()
                     },
-                    bodyContent = {
+                    floatingActionButtonPosition = FabPosition.End,
+                    content = {
                         LazyColumn {
                             item {
                                 Spacer(modifier = Modifier.height(20.dp))

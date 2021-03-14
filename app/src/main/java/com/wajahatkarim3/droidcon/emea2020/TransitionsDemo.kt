@@ -2,21 +2,20 @@ package com.wajahatkarim3.droidcon.emea2020
 
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.*
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 enum class FabSizeState {
@@ -82,14 +81,55 @@ fun ExplodingFabButton() {
         }
     }
 
+    val fabRadius: Int by fabTransition.animateInt(
+        transitionSpec = {
+            when {
+                FabSizeState.NORMAL isTransitioningTo FabSizeState.EXPLODED -> {
+                    keyframes {
+                        durationMillis = 1000
+                        50 at 0
+                        0 at 100
+                        0 at 1000
+                    }
+                }
+
+                FabSizeState.EXPLODED isTransitioningTo FabSizeState.NORMAL -> {
+                    keyframes {
+                        durationMillis = 1000
+                        0 at 0
+                        0 at 900
+                        50 at 1000
+                    }
+                }
+
+                else -> snap()
+            }
+        }
+    ) { state ->
+        when (state) {
+            FabSizeState.NORMAL -> 50
+            FabSizeState.EXPLODED -> 0
+        }
+    }
+
+    val fabOffset: Dp by fabTransition.animateDp { state ->
+        when(state) {
+            FabSizeState.NORMAL -> 0.dp
+            FabSizeState.EXPLODED -> 16.dp
+        }
+    }
+
     FloatingActionButton(
         onClick = {
             fabSizeState = if (fabSizeState == FabSizeState.NORMAL)
                 FabSizeState.EXPLODED
             else FabSizeState.NORMAL
         },
-        modifier = Modifier.size(fabSize.dp),
-        backgroundColor = fabColor
+        modifier = Modifier
+            .size(fabSize.dp)
+            .offset(x = fabOffset, y = fabOffset),
+        backgroundColor = fabColor,
+        shape = RoundedCornerShape(percent = fabRadius)
     ) {
         Icon(
             imageVector = Icons.Default.Add,

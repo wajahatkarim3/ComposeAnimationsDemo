@@ -38,7 +38,7 @@ fun CircleMenu() {
 
     var degreeDiff = 360 / menuOptions.size
 
-    Box(modifier = Modifier.fillMaxWidth().preferredHeight(500.dp),
+    Box(modifier = Modifier.fillMaxWidth().height(500.dp),
         contentAlignment = Alignment.Center
     ) {
         // Surrounding Menu Options

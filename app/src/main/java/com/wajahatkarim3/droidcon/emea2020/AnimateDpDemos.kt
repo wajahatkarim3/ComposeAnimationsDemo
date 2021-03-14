@@ -50,8 +50,8 @@ fun ScaleAndColorAnimation() {
         colors = ButtonDefaults.buttonColors(backgroundColor = color),
         modifier = Modifier
             .padding(16.dp)
-            .preferredHeight(height)
-            .preferredWidth(width),
+            .height(height)
+            .width(width),
     ) {
         Text("Scale & Color")
     }
@@ -69,7 +69,7 @@ fun GenderSelectAnimation() {
             contentDescription = "Male Image",
             contentScale = ContentScale.Crop,
             modifier = Modifier
-                .preferredSize(animateDpAsState(if (female.value) 100.dp else 250.dp).value)
+                .size(animateDpAsState(if (female.value) 100.dp else 250.dp).value)
                 .border(width = animateDpAsState(if (female.value) 0.dp else 4.dp).value,
                     color = animateColorAsState(if (female.value) Color.Transparent else Color.Red).value
                 )
@@ -82,7 +82,7 @@ fun GenderSelectAnimation() {
             contentDescription = "Female Image",
             contentScale = ContentScale.Crop,
             modifier = Modifier
-                .preferredSize(animateDpAsState(if (!female.value) 100.dp else 250.dp).value)
+                .size(animateDpAsState(if (!female.value) 100.dp else 250.dp).value)
                 .border(width = animateDpAsState(if (!female.value) 0.dp else 4.dp).value,
                     color = animateColorAsState(if (!female.value) Color.Transparent else Color.Red).value)
                 .padding(8.dp)

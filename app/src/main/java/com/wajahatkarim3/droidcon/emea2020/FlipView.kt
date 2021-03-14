@@ -1,9 +1,9 @@
 package com.wajahatkarim3.droidcon.emea2020
 
 import androidx.compose.animation.core.*
-import androidx.compose.foundation.InteractionState
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.indication
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
@@ -157,7 +157,7 @@ fun FlipView(front: @Composable () -> Unit, back: @Composable () -> Unit, flipDu
     Box(
         modifier = Modifier.fillMaxSize().clickable(onClick = {
             flipViewState = if (flipViewState == FlipViewState.FRONT) FlipViewState.BACK else FlipViewState.FRONT
-        }, interactionState = remember { InteractionState() }, indication = null),
+        }, interactionSource = remember { MutableInteractionSource() }, indication = null),
         contentAlignment = Alignment.Center,
     ) {
         Box(modifier = Modifier.graphicsLayer(

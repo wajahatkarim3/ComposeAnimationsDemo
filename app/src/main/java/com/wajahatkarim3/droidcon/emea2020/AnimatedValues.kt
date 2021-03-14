@@ -60,7 +60,7 @@ fun MovingSquare() {
         )
     }
 
-    Canvas(modifier = Modifier.preferredSize(100.dp), onDraw = {
+    Canvas(modifier = Modifier.size(100.dp), onDraw = {
         withTransform({
             translate(left = animPosX.value)
         }) {
