@@ -15,6 +15,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
@@ -22,6 +23,7 @@ enum class FabSizeState {
     NORMAL, EXPLODED
 }
 
+@Preview
 @Composable
 fun ExplodingFabButton() {
     var fabSizeState by remember { mutableStateOf(FabSizeState.NORMAL) }

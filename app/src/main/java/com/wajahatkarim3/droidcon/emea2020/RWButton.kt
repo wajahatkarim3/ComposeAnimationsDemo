@@ -20,12 +20,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 enum class RWButtonState {
     IDLE, PRESSED
 }
 
+@Preview
 @Composable
 fun RayWenderlichFavButton() {
     var toState by remember { mutableStateOf(RWButtonState.IDLE) }
@@ -34,6 +36,7 @@ fun RayWenderlichFavButton() {
     val transition: Transition<RWButtonState> = updateTransition(targetState = toState)
 
     val width: Dp by transition.animateDp(
+        label = "Width",
         transitionSpec = {
             when {
                 RWButtonState.IDLE isTransitioningTo RWButtonState.PRESSED -> {
@@ -53,6 +56,7 @@ fun RayWenderlichFavButton() {
     }
 
     val roundedCorner: Int by transition.animateInt(
+        label = "Corner Radius",
         transitionSpec = {
             when {
                 RWButtonState.IDLE isTransitioningTo RWButtonState.PRESSED -> {
@@ -72,6 +76,7 @@ fun RayWenderlichFavButton() {
     }
 
     val backgroundColor: Color by transition.animateColor(
+        label = "Background",
         transitionSpec = {
             when {
                 RWButtonState.IDLE isTransitioningTo RWButtonState.PRESSED -> {
@@ -91,6 +96,7 @@ fun RayWenderlichFavButton() {
     }
 
     val textColor: Color by transition.animateColor(
+        label = "Text Color",
         transitionSpec = {
             when {
                 RWButtonState.IDLE isTransitioningTo RWButtonState.PRESSED -> {
@@ -110,6 +116,7 @@ fun RayWenderlichFavButton() {
     }
 
     val textOpacity: Float by transition.animateFloat(
+        label = "Text Alpha",
         transitionSpec = {
             when {
                 RWButtonState.IDLE isTransitioningTo RWButtonState.PRESSED -> {
