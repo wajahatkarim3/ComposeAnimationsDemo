@@ -32,6 +32,7 @@ fun ExplodingFabButton() {
     val fabTransition: Transition<FabSizeState> = updateTransition(fabSizeState)
 
     val fabSize: Float by fabTransition.animateFloat(
+        label = "Fab Size",
         transitionSpec = {
             when {
                 FabSizeState.NORMAL isTransitioningTo FabSizeState.EXPLODED -> {
@@ -56,6 +57,7 @@ fun ExplodingFabButton() {
     }
 
     val fabColor: Color by fabTransition.animateColor(
+        label = "Fab Color",
         transitionSpec = {
             when {
                 FabSizeState.NORMAL isTransitioningTo FabSizeState.EXPLODED -> {
@@ -74,7 +76,7 @@ fun ExplodingFabButton() {
         }
     }
 
-    val fabIconAlpha: Float by fabTransition.animateFloat() { state ->
+    val fabIconAlpha: Float by fabTransition.animateFloat(label = "Fab Icon Alpha") { state ->
         when (state) {
             FabSizeState.NORMAL -> 1f
             FabSizeState.EXPLODED -> 0f
@@ -82,13 +84,14 @@ fun ExplodingFabButton() {
     }
 
     val fabRadius: Int by fabTransition.animateInt(
+        label = "Fab Radius",
         transitionSpec = {
             when {
                 FabSizeState.NORMAL isTransitioningTo FabSizeState.EXPLODED -> {
                     keyframes {
                         durationMillis = 1000
                         50 at 0
-                        0 at 100
+                        0 at 500
                         0 at 1000
                     }
                 }
@@ -97,7 +100,7 @@ fun ExplodingFabButton() {
                     keyframes {
                         durationMillis = 1000
                         0 at 0
-                        0 at 900
+                        0 at 500
                         50 at 1000
                     }
                 }
@@ -112,7 +115,7 @@ fun ExplodingFabButton() {
         }
     }
 
-    val fabOffset: Dp by fabTransition.animateDp { state ->
+    val fabOffset: Dp by fabTransition.animateDp(label = "Fab Offset") { state ->
         when(state) {
             FabSizeState.NORMAL -> 0.dp
             FabSizeState.EXPLODED -> 16.dp
