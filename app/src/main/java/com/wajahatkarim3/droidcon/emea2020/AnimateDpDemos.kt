@@ -22,7 +22,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.ui.tooling.preview.Preview
 
+@Preview
 @Composable
 fun ColorAnimation() {
     val enabled = remember { mutableStateOf(true) }
