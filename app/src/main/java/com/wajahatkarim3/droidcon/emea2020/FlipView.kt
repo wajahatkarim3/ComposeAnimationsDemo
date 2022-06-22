@@ -27,6 +27,7 @@ fun FlipView(front: @Composable () -> Unit, back: @Composable () -> Unit, flipDu
     val transition: Transition<FlipViewState> = updateTransition(flipViewState)
 
     val frontRotation: Float by transition.animateFloat(
+        label = "Front Rotation",
         transitionSpec = {
             when {
                 FlipViewState.FRONT isTransitioningTo FlipViewState.BACK -> {
@@ -58,6 +59,7 @@ fun FlipView(front: @Composable () -> Unit, back: @Composable () -> Unit, flipDu
     }
 
     val backRotation: Float by transition.animateFloat(
+        label = "Back Rotation",
         transitionSpec = {
             when {
                 FlipViewState.FRONT isTransitioningTo FlipViewState.BACK -> {
@@ -89,6 +91,7 @@ fun FlipView(front: @Composable () -> Unit, back: @Composable () -> Unit, flipDu
     }
 
     val frontOpacity: Float by transition.animateFloat(
+        label = "Front Opacity",
         transitionSpec = {
             when {
                 FlipViewState.FRONT isTransitioningTo FlipViewState.BACK -> {
@@ -122,6 +125,7 @@ fun FlipView(front: @Composable () -> Unit, back: @Composable () -> Unit, flipDu
     }
 
     val backOpacity: Float by transition.animateFloat(
+        label = "Back Opacity",
         transitionSpec = {
             when {
                 FlipViewState.FRONT isTransitioningTo FlipViewState.BACK -> {

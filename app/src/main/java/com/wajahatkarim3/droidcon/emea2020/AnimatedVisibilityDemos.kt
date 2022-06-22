@@ -24,7 +24,6 @@ import androidx.compose.ui.unit.sp
 import com.wajahatkarim3.droidcon.emea2020.ui.*
 import java.util.*
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun VisibilityAnimationFAB() {
     var expanded by remember { mutableStateOf(true) }

@@ -26,7 +26,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import com.wajahatkarim3.droidcon.emea2020.ui.DroidconEMEA2020Theme
 
 class DroidconActivity : ComponentActivity() {
-    @ExperimentalAnimationApi
+    @OptIn(ExperimentalAnimationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {

@@ -76,7 +76,7 @@ fun RayWenderlichFavButton() {
     }
 
     val backgroundColor: Color by transition.animateColor(
-        label = "Background",
+        label = "Background Color",
         transitionSpec = {
             when {
                 RWButtonState.IDLE isTransitioningTo RWButtonState.PRESSED -> {
