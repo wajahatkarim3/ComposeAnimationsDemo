@@ -3,7 +3,6 @@ package com.wajahatkarim3.animations.demo
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.FloatingActionButton
@@ -31,7 +30,7 @@ fun ExplodingFabButton() {
     val primaryColor = MaterialTheme.colors.primary
 
 
-    val fabTransition: Transition<FabSizeState> = updateTransition(fabSizeState)
+    val fabTransition: Transition<FabSizeState> = updateTransition(fabSizeState, label = "Fab Size Transition")
 
     val fabSize: Float by fabTransition.animateFloat(
         label = "Fab Size",

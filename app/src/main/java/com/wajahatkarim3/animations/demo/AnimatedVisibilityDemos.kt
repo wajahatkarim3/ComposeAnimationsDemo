@@ -59,13 +59,13 @@ fun VisibilityAnimationFAB() {
 @Composable
 fun AnimatedBottomNavigation() {
 
-    var bottomOptions = ArrayList<BottomMenuOption>()
+    val bottomOptions = ArrayList<BottomMenuOption>()
     bottomOptions.add(BottomMenuOption(bgColor = homeBgColor, textColor = homeTextColor, text = "Home", icon = Icons.Default.Home))
     bottomOptions.add(BottomMenuOption(bgColor = likeBgColor, textColor = likeTextColor, text = "Like", icon = Icons.Default.FavoriteBorder))
     bottomOptions.add(BottomMenuOption(bgColor = bookmarkBgColor, textColor = bookmarkTextColor, text = "Cart", icon = Icons.Default.ShoppingCart))
     bottomOptions.add(BottomMenuOption(bgColor = settingsBgColor, textColor = settingsTextColor, text = "Settings", icon = Icons.Default.Settings))
 
-    var selectedIndex = remember { mutableStateOf(0) }
+    val selectedIndex = remember { mutableStateOf(0) }
 
     Card(
         backgroundColor = Color.White,

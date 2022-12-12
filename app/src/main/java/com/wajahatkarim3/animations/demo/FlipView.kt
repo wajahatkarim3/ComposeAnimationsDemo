@@ -2,7 +2,6 @@ package com.wajahatkarim3.animations.demo
 
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.indication
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -24,7 +23,7 @@ enum class FlipViewState {
 fun FlipView(front: @Composable () -> Unit, back: @Composable () -> Unit, flipDurationMs: Int = 1000) {
 
     var flipViewState by remember { mutableStateOf(FlipViewState.FRONT) }
-    val transition: Transition<FlipViewState> = updateTransition(flipViewState)
+    val transition: Transition<FlipViewState> = updateTransition(flipViewState, label = "FlipViewState animation")
 
     val frontRotation: Float by transition.animateFloat(
         label = "Front Rotation",

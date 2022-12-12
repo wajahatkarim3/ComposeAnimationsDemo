@@ -21,22 +21,24 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import java.util.*
+import kotlin.math.cos
+import kotlin.math.sin
 
 @ExperimentalAnimationApi
 @Composable
 fun CircleMenu() {
     val menuOpen = remember { mutableStateOf(false) }
-    var distance = 150f
-    var startDegrees = -90.0
+    val distance = 150f
+    val startDegrees = -90.0
 
-    var menuOptions = ArrayList<MenuOptionModel>()
+    val menuOptions = ArrayList<MenuOptionModel>()
     menuOptions.add(MenuOptionModel(icon = Icons.Default.Home, backgroundColor = Color(0xFF35ACE9)))
     menuOptions.add(MenuOptionModel(icon = Icons.Default.Search, backgroundColor = Color(0xFF648C00)))
     menuOptions.add(MenuOptionModel(icon = Icons.Default.Notifications, backgroundColor = Color(0xFFFF5242)))
     menuOptions.add(MenuOptionModel(icon = Icons.Default.Settings, backgroundColor = Color(0xFFAD71D2)))
     menuOptions.add(MenuOptionModel(icon = Icons.Default.LocationOn, backgroundColor = Color(0xFFFFBD2E)))
 
-    var degreeDiff = 360 / menuOptions.size
+    val degreeDiff = 360 / menuOptions.size
 
     Box(modifier = Modifier.fillMaxWidth().height(500.dp),
         contentAlignment = Alignment.Center
@@ -44,7 +46,7 @@ fun CircleMenu() {
         // Surrounding Menu Options
         var degrees = startDegrees
         for (i in 0 until menuOptions.size) {
-            var menu = menuOptions[i]
+            val menu = menuOptions[i]
             MenuIcon(
                 icon = menu.icon,
                 backgroundColor = menu.backgroundColor,
@@ -85,11 +87,11 @@ fun MenuIcon(icon: ImageVector, backgroundColor: Color, degrees: Double, distanc
             modifier = Modifier
                 .graphicsLayer(
                     translationX = animateFloatAsState(
-                        if (isMenuOpen) distance * Math.cos(Math.toRadians(degrees))
+                        if (isMenuOpen) distance * cos(Math.toRadians(degrees))
                             .toFloat() else 0f
                     ).value,
                     translationY = animateFloatAsState(
-                        if (isMenuOpen) distance * Math.sin(Math.toRadians(degrees))
+                        if (isMenuOpen) distance * sin(Math.toRadians(degrees))
                             .toFloat() else 0f
                     ).value
                 ).clickable(onClick = {
