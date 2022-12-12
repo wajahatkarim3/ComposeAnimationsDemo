@@ -1,4 +1,4 @@
-package com.wajahatkarim3.droidcon.emea2020
+package com.wajahatkarim3.animations.demo
 
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.*

@@ -1,11 +1,10 @@
-package com.wajahatkarim3.droidcon.emea2020.ui
+package com.wajahatkarim3.animations.demo.ui
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 
 private val DarkColorPalette = darkColors(
     primary = purple200,
@@ -31,7 +30,7 @@ private val LightColorPalette = lightColors(
 )
 
 @Composable
-fun DroidconEMEA2020Theme(
+fun ComposeAnimDemoTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable() () -> Unit
 ) {

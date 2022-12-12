@@ -1,4 +1,4 @@
-package com.wajahatkarim3.droidcon.emea2020.ui
+package com.wajahatkarim3.animations.demo.ui
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

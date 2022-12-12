@@ -1,4 +1,4 @@
-package com.wajahatkarim3.droidcon.emea2020
+package com.wajahatkarim3.animations.demo
 
 import android.util.Log
 import androidx.compose.animation.ExperimentalAnimationApi

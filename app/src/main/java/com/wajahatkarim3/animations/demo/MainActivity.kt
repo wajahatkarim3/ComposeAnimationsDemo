@@ -1,4 +1,4 @@
-package com.wajahatkarim3.droidcon.emea2020
+package com.wajahatkarim3.animations.demo
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -22,15 +22,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.FabPosition
-import androidx.compose.runtime.CompositionLocalProvider
-import com.wajahatkarim3.droidcon.emea2020.ui.DroidconEMEA2020Theme
+import com.wajahatkarim3.animations.demo.ui.ComposeAnimDemoTheme
 
-class DroidconActivity : ComponentActivity() {
+class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalAnimationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            DroidconEMEA2020Theme {
+            ComposeAnimDemoTheme {
                 Scaffold(
                     topBar = {
                         TopAppBar(
@@ -42,8 +41,8 @@ class DroidconActivity : ComponentActivity() {
                         ExplodingFabButton()
                     },
                     floatingActionButtonPosition = FabPosition.End,
-                    content = {
-                        LazyColumn {
+                    content = { contentPadding ->
+                        LazyColumn(modifier = Modifier.padding(contentPadding)) {
                             item {
                                 Spacer(modifier = Modifier.height(20.dp))
                                 HeadingText(text = "Circle Menu")

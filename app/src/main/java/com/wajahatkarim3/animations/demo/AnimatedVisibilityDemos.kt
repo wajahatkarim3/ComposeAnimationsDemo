@@ -1,4 +1,4 @@
-package com.wajahatkarim3.droidcon.emea2020
+package com.wajahatkarim3.animations.demo
 
 import androidx.compose.animation.*
 import androidx.compose.animation.core.tween
@@ -21,7 +21,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.wajahatkarim3.droidcon.emea2020.ui.*
+import com.wajahatkarim3.animations.demo.ui.*
 import java.util.*
 
 @Composable

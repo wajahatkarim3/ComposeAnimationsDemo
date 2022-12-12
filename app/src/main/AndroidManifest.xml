@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.wajahatkarim3.droidcon.emea2020">
+    package="com.wajahatkarim3.animations.demo">
 
     <application
         android:allowBackup="true"
@@ -10,8 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DroidconEMEA2020">
         <activity
-            android:name=".DroidconActivity"
+            android:name=".MainActivity"
             android:label="@string/title_activity_droidcon"
+            android:exported="true"
             android:theme="@style/Theme.DroidconEMEA2020.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
