@@ -1,4 +1,4 @@
-# droidcon2020
-Demo codes for droidcon EMEA 2020 talk about Jetpack Compose and Animations
+# Compose Animations Demo
+Demo codes for "Animating Your Jetpack Compose Apps" talk about Jetpack Compose and Animations
 
-Slides: https://slides.com/wajahatkarim/composeanimations
+Slides: https://slides.com/wajahatkarim/jetpack-compose-for-games-animations
